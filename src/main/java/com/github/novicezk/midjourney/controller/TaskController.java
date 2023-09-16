@@ -9,12 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,6 +26,7 @@ public class TaskController {
 
 	@ApiOperation(value = "指定ID获取任务")
 	@GetMapping("/{id}/fetch")
+	@CrossOrigin(origins = "*")
 	public Task fetch(@ApiParam(value = "任务ID") @PathVariable String id) {
 		return this.taskStoreService.get(id);
 	}
