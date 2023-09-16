@@ -2,4 +2,8 @@ mj:
   task-store:
     type: in_memory
     timeout: 30d
-  translate-way: null
+  translate-way: baidu
+  baidu-translate:
+    appid: 20230916001819771
+    app-secret: sVNgLG1DwwSDTl4R4P3Z
+
