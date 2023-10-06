@@ -85,6 +85,7 @@ public class SubmitController {
 
 	@ApiOperation(value = "绘图变化-simple")
 	@PostMapping("/simple-change")
+	@CrossOrigin(origins = "*")
 	public SubmitResultVO simpleChange(@RequestBody SubmitSimpleChangeDTO simpleChangeDTO) {
 		TaskChangeParams changeParams = ConvertUtils.convertChangeParams(simpleChangeDTO.getContent());
 		if (changeParams == null) {
@@ -101,6 +102,7 @@ public class SubmitController {
 
 	@ApiOperation(value = "绘图变化")
 	@PostMapping("/change")
+	@CrossOrigin(origins = "*")
 	public SubmitResultVO change(@RequestBody SubmitChangeDTO changeDTO) {
 		if (CharSequenceUtil.isBlank(changeDTO.getTaskId())) {
 			return SubmitResultVO.fail(ReturnCode.VALIDATION_ERROR, "taskId不能为空");
@@ -155,6 +157,7 @@ public class SubmitController {
 
 	@ApiOperation(value = "提交Describe任务")
 	@PostMapping("/describe")
+	@CrossOrigin(origins = "*")
 	public SubmitResultVO describe(@RequestBody SubmitDescribeDTO describeDTO) {
 		if (CharSequenceUtil.isBlank(describeDTO.getBase64())) {
 			return SubmitResultVO.fail(ReturnCode.VALIDATION_ERROR, "base64不能为空");
@@ -175,6 +178,7 @@ public class SubmitController {
 
 	@ApiOperation(value = "提交Blend任务")
 	@PostMapping("/blend")
+	@CrossOrigin(origins = "*")
 	public SubmitResultVO blend(@RequestBody SubmitBlendDTO blendDTO) {
 		List<String> base64Array = blendDTO.getBase64Array();
 		if (base64Array == null || base64Array.size() < 2 || base64Array.size() > 5) {
