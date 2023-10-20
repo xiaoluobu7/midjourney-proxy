@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
@@ -73,9 +74,16 @@ public class DiscordServiceImpl implements DiscordService {
 
 	@Override
 	public Message<Void> reroll(String messageId, String messageHash, int messageFlags, String nonce) {
+
 		String paramsStr = replaceInteractionParams(this.paramsMap.get("reroll"), nonce)
-				.replace("$message_id", messageId)
-				.replace("$message_hash", messageHash);
+				.replace("$message_id", messageId);
+
+		if(ObjectUtils.isEmpty(messageHash)){
+			paramsStr=paramsStr.replace("MJ::JOB::reroll::0::$message_hash::SOLO", "MJ::Picread::Retry");
+		}else{
+			paramsStr=paramsStr.replace("$message_hash", messageHash);
+		}
+
 		paramsStr = new JSONObject(paramsStr).put("message_flags", messageFlags).toString();
 		return postJsonAndCheckStatus(paramsStr);
 	}

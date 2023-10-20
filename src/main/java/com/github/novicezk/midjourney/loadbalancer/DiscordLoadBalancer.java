@@ -80,4 +80,18 @@ public class DiscordLoadBalancer {
 		return null;
 	}
 
+	public Task getRunningTaskByDescription(String description) {
+		if (CharSequenceUtil.isBlank(description)) {
+			return null;
+		}
+		TaskCondition condition = new TaskCondition().setDescription(description);
+		for (DiscordInstance instance : getAliveInstances()) {
+			Optional<Task> optional = instance.getRunningTasks().stream().filter(condition).findFirst();
+			if (optional.isPresent()) {
+				return optional.get();
+			}
+		}
+		return null;
+	}
+
 }
