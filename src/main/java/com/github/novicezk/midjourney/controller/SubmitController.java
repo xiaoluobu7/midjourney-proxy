@@ -31,6 +31,7 @@ import eu.maxschuster.dataurl.IDataUrlSerializer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
@@ -227,6 +228,31 @@ public class SubmitController {
 
 	private String translatePrompt(String prompt) {
 		String promptEn;
+
+		promptEn = translatePromptEn(prompt);
+
+		//新增对--no内容的翻译
+		String[] prompts=promptEn.split(" --no ");
+		ArrayList<String> promptList = new ArrayList<String>();
+
+		String promptRT = prompts[0];
+		if(prompts.length>=2){
+			for(int i=1;i<prompts.length;i++){
+				String promptTmp=prompts[i];
+				String promptTmpEn=translatePromptEn(promptTmp);
+				promptRT=promptRT+" --no "+promptTmpEn;
+			}
+
+		}else{
+			promptRT=promptEn;
+		}
+
+		return promptRT;
+	}
+
+	@NotNull
+	private String translatePromptEn(String prompt) {
+		String promptEn;
 		int paramStart = prompt.indexOf(" --");
 		if (paramStart > 0) {
 			promptEn = this.translateService.translateToEnglish(prompt.substring(0, paramStart)).trim() + prompt.substring(paramStart);
@@ -238,4 +264,5 @@ public class SubmitController {
 		}
 		return promptEn;
 	}
+
 }
