@@ -233,7 +233,6 @@ public class SubmitController {
 
 		//新增对--no内容的翻译
 		String[] prompts=promptEn.split(" --no ");
-		ArrayList<String> promptList = new ArrayList<String>();
 
 		String promptRT = prompts[0];
 		if(prompts.length>=2){
