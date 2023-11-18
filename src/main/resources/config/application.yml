@@ -23,14 +23,21 @@ knife4j:
           - com.github.novicezk.midjourney.controller
 
 mj:
+  openai:
+    gpt-api-key: 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
   task-store:
-    type: in_memory
+    type: redis
     timeout: 30d
-  translate-way: null
+  translate-way: gpt
   ng-discord:
     cdn: https://draw.iti8.fun
   accounts:
     - guild-id: 1152509414838915102
       channel-id: 1152509942423633931
-      user-token: MTE1MjQ4NTg2OTM2NjgwODYxOQ.Gjy1Fv.1xNxUc6mfpXxkdNVrty34tw1BAT6HwDwDij7JM
+      user-token: MTE1MjQ4NTg2OTM2NjgwODYxOQ.Gu7aPK.taHxqlvZL3IRoe59WcpnWwE2Sr4vzzQPZ-cti8
       user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.289 Safari/537.36
+spring:
+  redis:
+    host: 47.76.62.6
+    port: 6379
+    password: wb@1688.com
